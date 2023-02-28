@@ -11,7 +11,7 @@ class MusicboxController extends AbstractController
     #[Route('/', name: 'app_musicbox')]
     public function index(): Response
     {
-        return $this->render('musicbox/index.html.twig', [
+        return $this->render('musicbox/home.html.twig', [
             'controller_name' => 'MusicboxController',
         ]);
     }
