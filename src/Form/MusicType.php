@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Music;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +15,7 @@ class MusicType extends AbstractType
         $builder
             ->add('music_title')
             ->add('singer_name')
-            ->add('cover')
+            ->add('coverFile')
             ->add('audio');
     }
 

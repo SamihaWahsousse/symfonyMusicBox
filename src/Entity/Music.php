@@ -40,6 +40,28 @@ class Music
     #[ORM\Column(length: 255)]
     private ?string $audio = null;
 
+    /**
+     * @Vich\UploadableField(mapping="album_audio", fileNameProperty="audio")
+     * @var File
+     */
+    private $audioFile;
+
+    #[ORM\ManyToOne(inversedBy: 'music')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
+    public function setAudioFile(File $audio = null)
+    {
+        $this->audioFile = $audio;
+    }
+
+    public function getAudioFile()
+    {
+        return $this->audioFile;
+    }
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +114,9 @@ class Music
         return $this->coverFile;
     }
 
+    /////////////////////////////////////////
+
+
     public function getAudio(): ?string
     {
         return $this->audio;
@@ -100,6 +125,19 @@ class Music
     public function setAudio(string $audio): self
     {
         $this->audio = $audio;
+
+        return $this;
+    }
+    /////////////////////////////////////////////////////
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
