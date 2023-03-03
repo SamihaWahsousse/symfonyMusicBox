@@ -67,24 +67,24 @@ class Music
         return $this->id;
     }
 
-    public function getMusicTitle(): ?string
+    public function getMusic_Title(): ?string
     {
         return $this->music_title;
     }
 
-    public function setMusicTitle(string $music_title): self
+    public function setMusic_Title(string $music_title): self
     {
         $this->music_title = $music_title;
 
         return $this;
     }
 
-    public function getSingerName(): ?string
+    public function getSinger_Name(): ?string
     {
         return $this->singer_name;
     }
 
-    public function setSingerName(string $singer_name): self
+    public function setSinger_Name(string $singer_name): self
     {
         $this->singer_name = $singer_name;
 

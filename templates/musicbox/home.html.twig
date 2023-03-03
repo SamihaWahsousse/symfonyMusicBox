@@ -3,38 +3,26 @@
 {# {% block title %}Hello MusicboxController!
 {% endblock %} #}
 
+
 {% block body %}
+	{# {{dump (songs[0].music_title)}} #}
+
+
 	<div class="swiper mySwiper">
 		<div class="swiper-wrapper">
-			<div class="swiper-slide">
-				<img src="https://swiperjs.com/demos/images/nature-1.jpg"/>
-			</div>
-			<div class="swiper-slide">
-				<img src="https://swiperjs.com/demos/images/nature-2.jpg"/>
-			</div>
-			<div class="swiper-slide">
-				<img src="https://swiperjs.com/demos/images/nature-3.jpg"/>
-			</div>
-			<div class="swiper-slide">
-				<img src="https://swiperjs.com/demos/images/nature-4.jpg"/>
-			</div>
-			<div class="swiper-slide">
-				<img src="https://swiperjs.com/demos/images/nature-5.jpg"/>
-			</div>
-			<div class="swiper-slide">
-				<img src="https://swiperjs.com/demos/images/nature-6.jpg"/>
-			</div>
-			<div class="swiper-slide">
-				<img src="https://swiperjs.com/demos/images/nature-7.jpg"/>
-			</div>
-			<div class="swiper-slide">
-				<img src="https://swiperjs.com/demos/images/nature-8.jpg"/>
-			</div>
-			<div class="swiper-slide">
-				<img src="https://swiperjs.com/demos/images/nature-9.jpg"/>
-			</div>
+			{% for song in songs %}
+				<div class="swiper-slide">
+					<img src="{{asset ('uploads/covers/'~ song.cover ~'')}}"/>
+					<div class="songDetails text-center bg-white py-2 w-full opacity-75">
+						<h4 class="text-xl text-black font-bold">{{song.singer_name}}</h4>
+						<p class="text-base text-gray-900 font-normal">{{ song.music_title }}</p>
+					</div>
+				</div>
+
+
+			{% endfor %}
 		</div>
+
 		<div class="swiper-pagination"></div>
 	</div>
-
 {% endblock %}

@@ -17,13 +17,13 @@
 		<!--Script JS -->
 		{% block javascripts %}{% endblock %}
 		<!--Swiper JS CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 		<script src="{{ asset ("assets/js/app.js")}}" defer></script>
 
 	</head>
 
 
 	<body>
-		<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 		{% include "_partials/_nav.html.twig" %}
 		{% block body %}{% endblock %}
 
