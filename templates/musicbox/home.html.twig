@@ -7,22 +7,57 @@
 {% block body %}
 	{# {{dump (songs[0].music_title)}} #}
 
-
-	<div class="swiper mySwiper">
-		<div class="swiper-wrapper">
-			{% for song in songs %}
-				<div class="swiper-slide">
-					<img src="{{asset ('uploads/covers/'~ song.cover ~'')}}"/>
-					<div class="songDetails text-center bg-white py-2 w-full opacity-75">
-						<h4 class="text-xl text-black font-bold">{{song.singer_name}}</h4>
-						<p class="text-base text-gray-900 font-normal">{{ song.music_title }}</p>
-					</div>
+	{# ♡ #}
+		<div class="row"> <div class="col-12">
+			<div class="swiper mySwiper">
+				<div class="swiper-wrapper">
+					{% for song in songs %}
+						<div class="swiper-slide">
+							<img src="{{asset ('uploads/covers/'~ song.cover ~'')}}"/>
+							<div class="songDetails text-center bg-white py-2 w-full opacity-75">
+								<h4 class="text-xl text-black font-bold">{{song.singer_name}}</h4>
+								<p class="text-base text-gray-900 font-normal">{{ song.music_title }}</p>
+							</div>
+						</div>
+					{% endfor %}
 				</div>
-
-
-			{% endfor %}
+			</div>
 		</div>
-
 		<div class="swiper-pagination"></div>
 	</div>
+{% endblock %}
+
+{% block audioPlayer %}
+	<div class="playerAudioContainer">
+		<div class="row">
+			<div class="col-12">
+				<p>here is the player audio</p>
+				<div class="music-container" id="music-container">
+					<div class="music-info">
+						<h4 class="title" id="title"></h4>
+						<div class="progress-container" id="progress-container">
+							<div class="progress" id="progress"></div>
+						</div>
+					</div>
+					<audio src="{{asset ('uploads/covers/love-song-10539.mp3')}}" id="audio"></audio>
+					<div class="img-container">
+						<img src="{{asset ('uploads/covers/Bonnie-und-Clyde.jpg')}}" alt="music-cover" id="cover"/>
+					</div>
+					<div class="navigation">
+						<button id="prev" class="action-btn">
+							<i class="fa fa-backward" aria-hidden="true"></i>
+						</button>
+						<button id="play" class="action-btn action-btn-big">
+							<i class="fa fa-play" aria-hidden="true"></i>
+						</button>
+						<button id="next" class="action-btn">
+							<i class="fa fa-forward" aria-hidden="true"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 {% endblock %}

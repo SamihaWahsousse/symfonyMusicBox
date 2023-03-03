@@ -12,8 +12,10 @@
 		<!--Feuilles de style -->
 		{% block stylesheets %}{% endblock %}
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+		<link rel="stylesheet" href="{{ asset ("assets/css/style.css")}}"/>
 		<link
-		rel="stylesheet" href="{{ asset ("assets/css/style.css")}}"/>
+		rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+
 		<!--Script JS -->
 		{% block javascripts %}{% endblock %}
 		<!--Swiper JS CDN -->
@@ -27,7 +29,7 @@
 		{% include "_partials/_nav.html.twig" %}
 		{% block body %}{% endblock %}
 
-
 	</body>
+	{% block audioPlayer %}{% endblock %}
 
 </html>
