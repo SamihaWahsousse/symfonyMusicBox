@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MusicboxController extends AbstractController
 {
-    #[Route('/', name: 'app_musicbox')]
+    #[Route('/home', name: 'app_musicbox')]
     public function index(MusicRepository $musicRepository): Response
     {
         $songs = $musicRepository->findAll([]);
