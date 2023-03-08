@@ -23,8 +23,8 @@ class MusicCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('music_title'),
-            TextField::new('singer_name'),
+            TextField::new('musicTitle'),
+            TextField::new('singerName'),
             ImageField::new('cover')
                 ->setBasePath('/uploads/covers/')
                 ->setUploadDir('public/uploads/covers')

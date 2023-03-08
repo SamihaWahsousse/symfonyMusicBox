@@ -20,10 +20,10 @@ class Music
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $music_title = null;
+    private ?string $musicTitle = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $singer_name = null;
+    private ?string $singerName = null;
 
 
 
@@ -67,26 +67,26 @@ class Music
         return $this->id;
     }
 
-    public function getMusic_Title(): ?string
+    public function getMusicTitle(): ?string
     {
-        return $this->music_title;
+        return $this->musicTitle;
     }
 
-    public function setMusic_Title(string $music_title): self
+    public function setMusicTitle(string $musicTitle): self
     {
-        $this->music_title = $music_title;
+        $this->musicTitle = $musicTitle;
 
         return $this;
     }
 
-    public function getSinger_Name(): ?string
+    public function getSingerName(): ?string
     {
-        return $this->singer_name;
+        return $this->singerName;
     }
 
-    public function setSinger_Name(string $singer_name): self
+    public function setSingerName(string $singerName): self
     {
-        $this->singer_name = $singer_name;
+        $this->singerName = $singerName;
 
         return $this;
     }
