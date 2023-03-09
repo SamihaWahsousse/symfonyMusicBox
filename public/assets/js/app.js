@@ -124,11 +124,11 @@ function timeUpdate() {
 
 //favorit events
 
-const favoriteBtn = document.getElementById("favoriteIcon");
-favoriteBtn.addEventListener("click", function () {
-	if (favoriteBtn.style.color === "white") {
-		favoriteBtn.style.color = "#8f4da9";
-	} else {
-		favoriteBtn.style.color = "white";
-	}
-});
+// const favoriteBtn = document.getElementById("favoriteIcon");
+// favoriteBtn.addEventListener("click", function () {
+// 	if (favoriteBtn.style.color === "white") {
+// 		favoriteBtn.style.color = "#8f4da9";
+// 	} else {
+// 		favoriteBtn.style.color = "white";
+// 	}
+// });

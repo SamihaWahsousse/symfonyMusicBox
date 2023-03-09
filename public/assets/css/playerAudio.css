@@ -63,10 +63,21 @@ body {
 	border-radius: 15px 15px 0px 0px;
 	height: 7rem;
 }
-#favoriteIcon {
+/* #favoriteIcon {
 	margin-left: 80%;
 	font-size: large;
 	color: #8f4da9;
+} */
+.favoriteIconContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 2rem;
+	cursor: pointer;
+	color: white;
+}
+.like {
+	color: #8f4da9 !important;
 }
 
 .player .player-track .active {
