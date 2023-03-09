@@ -4,9 +4,49 @@
 {% endblock %}
 
 {% block body %}
+	{{ form_start(form) }}
+
+	{# {% if error %}<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>{% endif %} #}
+
+	<div class="my-custom-class-for-errors">
+		{{ form_errors(form) }}
+	</div>
+	<div class="container">
+		<div class="login-container">
+			<input id="item-2" type="radio" name="item" class="sign-up" checked>
+			<label for="item-2" class="item">Register</label>
+
+			<div class="login-form">
+				<div class="sign-up-htm">
+					<div class="group">
+						{{ form_widget(form.name, {'attr': {'class': 'input','id': 'user', 'type': 'text', 'placeholder': 'Username'}}) }}
+					</div>
+
+					<div class="group">
+						{{ form_widget(form.email, {'attr': {'class': 'input', 'id' :'pass','type' : 'text' ,'placeholder': 'Email adress'}}) }}
+					</div>
 
 
-	<div class="example-wrapper">
-		{{ form (form) }}
+					<div class="group">
+						{{ form_widget(form.password, {'attr': {'class': 'input', 'id' :'pass','type' : 'password' ,'placeholder': 'Password'}}) }}
+					</div>
+
+					<div class="group">
+						{{ form_widget(form.submit, {'attr': {'class': 'button', 'value': 'Sign Up'}}) }}
+					</div>
+
+					<div class="hr"></div>
+					<div class="footer">
+						<a href="{{ path('app_login') }}">Already have an account?</a>
+					</div>
+
+				</div>
+
+			</div>
 		</div>
-	{% endblock %}
+
+		{{ form_rest(form) }}
+		{{ form_end(form) }}
+	</div>
+
+{% endblock %}

@@ -1,6 +1,5 @@
 /* html, */
 body {
-	background-color: #dfe7ef;
 	align-items: center;
 	justify-content: center;
 	font-family: "Montserrat", sans-serif;
@@ -17,7 +16,6 @@ body {
 	position: absolute;
 	top: 10px;
 	left: 25px;
-	/* background: url("https://trevor-reznik.github.io/guides/email-template/4.jpg"); */
 	background-repeat: no-repeat;
 	background-position: bottom center;
 	background-size: cover;
@@ -63,7 +61,6 @@ body {
 	margin-right: 15px;
 	padding: 5px 15px 5px 160px;
 	border-radius: 15px 15px 0px 0px;
-	border: 5px solid white;
 	height: 7rem;
 }
 .player .player-track .active {
@@ -117,13 +114,12 @@ body {
 	font-size: 15px;
 	cursor: pointer;
 	flex-basis: auto;
-	/* text-align: center; */
 }
 .play-btn:before,
 .pause-btn:before {
 	border-radius: 500px;
 	color: #ffffff;
-	background-color: #1db954;
+	background-color: #8f4da9;
 	padding: 10px 10px 10px 15px;
 }
 

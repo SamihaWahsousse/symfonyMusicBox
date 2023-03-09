@@ -42,12 +42,12 @@ class RegisterController extends AbstractController
             $entityManager->flush();
 
             // // ... perform some action, such as saving the task to the database
-            return $this->redirectToRoute('app_musicbox');
+            return $this->redirectToRoute('app_login');
         }
 
 
         return $this->render('register/index.html.twig', [
-            'controller_name' => 'RegisterController',
+            // 'controller_name' => 'RegisterController',
             'form' => $form->createview()
 
         ]);
