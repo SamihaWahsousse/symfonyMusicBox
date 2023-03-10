@@ -19,6 +19,8 @@ body {
 	margin: 0;
 	padding: 0;
 	color: #000;
+	overflow-x: auto;
+	overflow-y: hidden;
 }
 
 .swiper {
@@ -26,6 +28,7 @@ body {
 	padding-top: 5%;
 	padding-bottom: 70px;
 	margin-bottom: 100px;
+	/* margin: 0 !important; */
 }
 
 .swiper-slide {
@@ -33,6 +36,11 @@ body {
 	background-size: cover;
 	width: 300px;
 	height: 300px;
+}
+
+.swiperContainer {
+	width: 80%; /* or any other width you prefer */
+	margin: 10%; /* this will center the container horizontally */
 }
 
 .swiper-slide img {
@@ -43,6 +51,7 @@ body {
 
 .swiper-pagination {
 	margin-bottom: 25%;
+	color: black;
 }
 
 .buttonPlayContainer {

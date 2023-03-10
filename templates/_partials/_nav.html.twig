@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light">
+{# <nav class="navbar navbar-expand-lg bg-light">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="{{ path('app_musicbox') }}">
 			<img src="{{ asset('assets/img/logo.png') }}" alt="logo" width="150" height="100"/>
@@ -20,20 +20,38 @@
 			</ul>
 		</div>
 	</div>
-</nav>
+</nav> #}
 
 
-{# <div class="wrapper">
-											<nav>
-												<a href="{{ path('app_musicbox') }}" class=" logo">
-													<img src="{{ asset('assets/img/logo.png') }}" alt="logo" width="150" height="100"/>
-												</a>
-												<ul>
-													<li><a href="#">Register</a></li>
-													<li><a href="#">Login</a></li>
-													<li><a href="#">Pricing</a></li>
-													<li><a href="#">FAQ</a></li>
-													<li><a href="#">Contacts</a></li>
-												</ul>
-											</nav>
-										</div> #}
+<nav class="navbar">
+	<h1>BoxMusic</h1>
+
+	{# {% if app.user %}
+																										<div class:"mb">
+																											Welcome :
+																											{{ app.user.userIdentifier }};
+																								
+																										</div>
+																									{% endif %} #}
+	<div class="tabs">
+		<input id="tab-1" type="radio" name="group" onclick="window.location.href = '{{path('app_musicbox')}}';"/>
+		<input id="tab-2" type="radio" name="group"/>
+		<input id="tab-3" type="radio" name="group"/>
+		<input id="tab-4" type="radio" name="group"/>
+
+		<div class="buttons">
+			<label class="material-symbols-outlined" for="tab-1">
+				home
+			</label>
+			<label class="material-symbols-outlined" for="tab-2">
+				notifications
+			</label>
+			<label class="material-symbols-outlined" for="tab-3">
+				favorite
+			</label>
+			<label class="material-symbols-outlined" for="tab-4">
+				logout
+			</label>
+			<div class="underline"></div>
+		</div>
+	</nav>

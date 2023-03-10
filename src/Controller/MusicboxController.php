@@ -57,38 +57,6 @@ class MusicboxController extends AbstractController
         return $this->redirectToRoute('app_musicbox');
     }
 
+    // #[Route('/favorites/remove/{id}', name: 'remove_favorites')]
 
-
-
-
-
-    // // Récupère les informations sur la chanson à partir de la base de données
-
-    // #[Route('/home', name: 'app_musicbox')]
-
-    // public function play(MusicRepository $musicRepository, $songId): Response
-    // {
-    //     $songs = $musicRepository->find($songId);
-    //     $songF = $this->getDoctrine()
-    //         ->getRepository(Music::class);
-
-    //     return $this->render('musicbox/home.html.twig', [
-    //         'songF' => $songs,
-    //     ]);
-    // }
-
-
-
-
-
-    /*
-    #[Route('/displayMusic/{musicId}', name: 'app_musicbox1')]
-    public function displayMusic(ManagerRegistry $doctrine, $musicId): Response
-    {
-        $music = $this->getDoctrine()->getRepository(Music::class)->find($musicId);
-        // dd($music);
-        return $this->render('musicbox/home.html.twig', [
-            "music" => $music,
-        ]);
-    }*/
 }
