@@ -3,25 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Music;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\MusicRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MusicboxController extends AbstractController
 {
     #[Route('/home', name: 'app_musicbox')]
     public function index(MusicRepository $musicRepository): Response
 
-    // public function index(ManagerRegistry $doctrine, $id): Response
     {
-        // $songs = $doctrine->getRepository(Music::class)->find($id);
         $songs = $musicRepository->findAll([]);
-        // $songs = $musicRepository->findBy(['music_title' => "music_title"]);
-
         return $this->render('musicbox/home.html.twig', [
             'songs' => $songs,
         ]);
@@ -32,7 +27,7 @@ class MusicboxController extends AbstractController
     public function ajoutFavoris(Music $music)
     {
         if (!$music) {
-            throw new NotFoundHttpException('Pas d\'annonce trouvée');
+            throw new NotFoundHttpException('Pas de musique trouvée');
         }
         $music->addFavorite($this->getUser());
 
@@ -46,7 +41,7 @@ class MusicboxController extends AbstractController
     public function retraitFavoris(Music $music)
     {
         if (!$music) {
-            throw new NotFoundHttpException('Pas d\'annonce trouvée');
+            throw new NotFoundHttpException('Pas de musique trouvée');
         }
 
         $music->removeFavorite($this->getUser());
@@ -57,6 +52,34 @@ class MusicboxController extends AbstractController
         return $this->redirectToRoute('app_musicbox');
     }
 
-    // #[Route('/favorites/remove/{id}', name: 'remove_favorites')]
 
+    // #[Route('/user/favorites', name: 'app_favorites')]
+    // public function favorites(): Response
+    // {
+    //     // TODO: retrieve the user's favorite music from the database
+
+    //     /** @var $user User */
+    //     $user = $this->getUser();
+    //     $songs = $user->getFavorites();
+    //     // dd($userFavorites);
+
+    //     return $this->render('musicbox/home.html.twig', [
+    //         'songs' => $songs,
+    //     ]);
+    // }
 }
+
+    // //displau user favorites Music
+    // #[Route('/user/{id}/favorites', name: 'user_favorites')]
+
+    // public function favorites(User $user)
+    // {
+    //     $userFavorites = $this->getDoctrine()
+    //         ->getRepository(Favorite::class)
+    //         ->findBy(['user' => $user]);
+
+    //     return $this->render('product/favorites.html.twig', [
+    //         'user' => $user,
+    //         'userFavorites' => $userFavorites,
+    //     ]);
+    // }

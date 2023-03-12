@@ -77,3 +77,7 @@ body {
 		0.3
 	); /* Darker  background on hover */
 }
+
+.labelCategories {
+	color: black;
+}

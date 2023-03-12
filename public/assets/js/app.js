@@ -1,3 +1,26 @@
+//get data songs from twig home.twig.html in JSON format
+var arraySongs = document.getElementById("arraySongs");
+var songs = arraySongs.dataset.songs;
+//console.log("my songs list : " + songs);
+//We use JSON.parse() to convert songs Array of JSON OBJECTS to a JavaScript array
+if (typeof songs === "string") {
+	songs = JSON.parse(songs);
+	// console.log(songs);
+}
+//retrieve Categories from songs array
+var songsByCategory = [];
+songs.forEach((song) => {
+	console.log(song.category);
+	if (songsByCategory[song.category]) {
+		songsByCategory[song.category].push(song);
+	} else {
+		songsByCategory[song.category] = [song];
+	}
+});
+console.log("resultat:" + songsByCategory.keys());
+
+//Swiper JS
+
 var swiper = new Swiper(".mySwiper", {
 	effect: "coverflow",
 	grabCursor: true,
