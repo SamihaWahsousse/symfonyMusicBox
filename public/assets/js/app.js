@@ -17,8 +17,88 @@ songs.forEach((song) => {
 		songsByCategory[song.category] = [song];
 	}
 });
-console.log("resultat:" + songsByCategory.keys());
+console.log("resultat: " + songsByCategory["Pop"]);
 
+//display swiper slide with update data from songs array (category)
+const swiperSlideTemplate = document.querySelector(
+	"[ data-swiperslide-template]"
+);
+const swiperWrapper = document.querySelector("[data-swiper-wrapper]");
+const slideMusic = document.querySelector("[data-slide-music]");
+const singePhoto = document.querySelector("[data-singer-image]");
+const singerNom = document.querySelector("[data-singer-name]");
+const musicTitle = document.querySelector("[data-music-title]");
+updateSwipper("all");
+
+function updateSwipper(category) {
+	let songsToDisplay;
+	if (category === "all") {
+		songsToDisplay = this.songs;
+	} else {
+		songsToDisplay = this.songsByCategory[category];
+	}
+	swiperWrapper.innerHTML = "";
+	songsToDisplay.forEach((song) => {
+		const swiperSlide = swiperSlideTemplate.content
+			.cloneNode(true)
+			.querySelector("div");
+		swiperSlide
+			.querySelector("img")
+			.setAttribute("src", "uploads/covers/" + song.cover);
+		swiperSlide.querySelector("div.songDetails > h4").innerText =
+			song.singerName;
+		swiperSlide.querySelector("div.songDetails > p").innerText =
+			song.musicTitle;
+
+		let playBtn = swiperSlide.querySelector(
+			".buttonPlayContainer > button"
+		);
+		playBtn.addEventListener("click", () => {
+			playMusicFromSwiper(song);
+		});
+
+		let favoriteHeart = swiperSlide.querySelector(
+			".favoriteIconContainer > a"
+		);
+		/*
+		let hrefRemoveFavorite = Routing.generate("remove_favorites", {
+			id: song.id,
+		});
+		let hrefAddFavorite = Routing.generate("add_favorites", {
+			id: song.id,
+		}); */
+		if (song.favorite) {
+			favoriteHeart.setAttribute(
+				"href",
+				"/favorites/remove/" + song.id
+			);
+			favoriteHeart
+				.querySelector("#favoriteIconHeart")
+				.classList.add("fas");
+		} else {
+			favoriteHeart.setAttribute("href", "/favorites/add/" + song.id);
+			favoriteHeart
+				.querySelector("#favoriteIconHeart")
+				.classList.add("far");
+		}
+
+		swiperWrapper.append(swiperSlide);
+	});
+}
+
+// gestion de la sélection d'une catégorie
+var radioButtonSection = document.getElementsByName("category");
+var selectedCategory = "all";
+for (var i = 0; i < radioButtonSection.length; i++) {
+	radioButtonSection[i].onclick = function () {
+		console.log("selected cat : " + this.value);
+
+		if (selectedCategory != this.value) {
+			selectedCategory = this.value;
+			updateSwipper(selectedCategory);
+		}
+	};
+}
 //Swiper JS
 
 var swiper = new Swiper(".mySwiper", {
@@ -39,7 +119,7 @@ var swiper = new Swiper(".mySwiper", {
 	},
 	on: {
 		init: function () {
-			console.log("test");
+			// console.log("test");
 		},
 	},
 });
