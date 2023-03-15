@@ -51,35 +51,4 @@ class MusicboxController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('app_musicbox');
     }
-
-
-    // #[Route('/user/favorites', name: 'app_favorites')]
-    // public function favorites(): Response
-    // {
-    //     // TODO: retrieve the user's favorite music from the database
-
-    //     /** @var $user User */
-    //     $user = $this->getUser();
-    //     $songs = $user->getFavorites();
-    //     // dd($userFavorites);
-
-    //     return $this->render('musicbox/home.html.twig', [
-    //         'songs' => $songs,
-    //     ]);
-    // }
 }
-
-    // //displau user favorites Music
-    // #[Route('/user/{id}/favorites', name: 'user_favorites')]
-
-    // public function favorites(User $user)
-    // {
-    //     $userFavorites = $this->getDoctrine()
-    //         ->getRepository(Favorite::class)
-    //         ->findBy(['user' => $user]);
-
-    //     return $this->render('product/favorites.html.twig', [
-    //         'user' => $user,
-    //         'userFavorites' => $userFavorites,
-    //     ]);
-    // }

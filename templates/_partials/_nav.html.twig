@@ -1,26 +1,54 @@
 <nav class="navbar">
-	<h1>BoxMusic</h1>
-
-	{# {% if app.user %}<div class:"mb">Welcome :{{ app.user.userIdentifier }};</div>{% endif %} #}
-	<div class="tabs">
-		<input id="tab-1" type="radio" name="group" onclick="window.location.href = '{{path('app_musicbox')}}';"/>
-		<input id="tab-2" type="radio" name="group"/>
-		<input id="tab-3" type="radio" name="group" onclick="window.location.href = '{{path('app_favorites')}}';"/>
-		<input id="tab-4" type="radio" name="group" onclick="window.location.href = '{{path('app_logout')}}';"/>
-
-		<div class="buttons">
-			<label class="material-symbols-outlined" for="tab-1">
-				home
-			</label>
-			<label class="material-symbols-outlined" for="tab-2">
-				category
-			</label>
-			<label class="material-symbols-outlined" for="tab-3">
-				favorite
-			</label>
-			<label class="material-symbols-outlined" for="tab-4">
-				logout
-			</label>
-			<div class="underline"></div>
+	<button onclick="toggleMenu()" class="burger"></button>
+	<div class="dropdowns">
+		<div class="dropdown">
+			<button onclick="window.location.href = '{{path('app_musicbox')}}';">
+				<img src="{{ asset ("assets/img/home.png")}}"/>
+				Home
+			</button>
 		</div>
-	</nav>
+		<div class="dropdown">
+			<button>
+				<img src="{{ asset ("assets/img/list.png")}}"/>
+				Choose Category
+			</button>
+			<div class="dropdown-menu">
+				<div>
+					<h2>Populars</h2>
+					<button name="category" value="all">All</button>
+				</div>
+				<div>
+					<h2>Other</h2>
+					<button name="category" value="Pop">Pop</button>
+					<button name="category" value="Electro">Electro Music</button>
+
+				</div>
+				<div>
+					<h2>Détente/Classique</h2>
+					<button name="category" value="Piano">Piano</button>
+					<button name="category" value="Country">Country</button>
+
+				</div>
+			</div>
+		</div>
+		<div class="dropdown">
+			<button onclick="window.location.href = '{{path('app_favorites')}}';">
+				<img src="{{ asset ("assets/img/heart.png")}}"/>
+				Favoris
+			</button>
+		</div>
+		<div class="dropdown">
+			<button onclick="window.location.href = '{{path('app_logout')}}';">
+				<img src="{{ asset ("assets/img/log-out.png")}}"/>
+				logout
+			</button>
+		</div>
+	</div>
+	{% if app.user %}
+		<div class="user-info">
+			<img src="{{ asset ("assets/img/user.png")}}"/>
+			<span>Welcome,
+				{{ app.user.name }}</span>
+		</div>
+	{% endif %}
+</nav>

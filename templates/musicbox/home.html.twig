@@ -4,18 +4,15 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>
-			{# {% block title %}{% endblock %} #}
 			Home-MusicBox
 		</title>
 		<!--Feuilles de style -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-		<link rel="stylesheet" href="{{ asset ("assets/css/player.css")}}"/>
 		<link rel="stylesheet" href="{{ asset ("assets/css/playerAudio.css")}}"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"/>
 		<link rel="stylesheet" href="{{ asset ("assets/css/style.css")}}"/>
-		<link rel="stylesheet" href="{{ asset ("assets/css/sideBar.css")}}"/>
 		<link
 		rel="stylesheet" href="{{ asset ("assets/css/navBar.css")}}"/>
 
@@ -27,38 +24,23 @@
 	</head>
 	<body>
 		<header>
-			{% set original_url = path('app_musicbox') %}
-			<div class="navBar">
-				{% if app.user %}
-					<div class="mb-3">
-						You are logged in as
-						{{ app.user.userIdentifier }},
-						<a href="{{ path('app_logout') }}">Logout</a>
-					</div>
-				{% endif %}
-				{% include "_partials/_nav.html.twig" %}
-			</div>
+			{% include "_partials/_nav.html.twig" %}
 		</header>
-		<div id="categoryChoice" style="display: flex; margin-top: 10%">
-			<fieldset>
-				<legend>Select one of the following categories :
-				</legend>
-				<input type="radio" name="category" value="all"/><label class="labelCategories" for="all">All songs</label><br/>
 
-				<input type="radio" name="category" value="Pop"/><label class="labelCategories" for="1">Pop</label><br/>
-				<input type="radio" name="category" value="Piano"/><label class="labelCategories" for="2">Piano</label><br/>
-			</fieldset>
-		</div>
 		{% set arraySongs = [] %}
 		{% for song in songs %}
 
 			{% set isFavorite = false %}
 
-			{% for favoris in app.user.favorites %}
-				{% if favoris.id == song.id %}
-					{% set isFavorite = true %}
-				{% endif %}
-			{% endfor %}
+			{# verify if the user is connected then display his/here favorites audio#}
+			{% if app.user %}
+				{% for favoris in app.user.favorites %}
+					{% if favoris.id == song.id %}
+						{% set isFavorite = true %}
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+
 
 			{% set jsSong = {
 				id : song.id,
@@ -69,20 +51,22 @@
 				category :song.category.CategoryName,
 				favorite : isFavorite,
 				} %}
-
-
 			{% set arraySongs = arraySongs|merge([jsSong]) %}
 		{% endfor %}
 		<div id="arraySongs" data-songs="{{ arraySongs|json_encode }}"></div>
+
+
 		<div class="swiperContainer">
 			<div class="swiper mySwiper">
-				<div class="swiper-wrapper" data-swiper-wrapper>
+				<div
+					class="swiper-wrapper" data-swiper-wrapper>
+					{# use the html template to add sliders in swiper for each music information (image/singerName/songaName...) #}
 					<template data-swiperslide-template>
 						<div class="swiper-slide" data-slide-music>
 							<img src="" data-singer-image/>
 							<div class="songDetails text-center bg-white py-2 w-full opacity-75">
-								<h4 class="text-xl text-black font-bold" data-singer-name>singerName</h4>
-								<p class="text-base text-gray-900 font-normal" data-music-title>musicTitle</p>
+								<p class="title" data-music-title>musicTitle</p>
+								<h4 class="singer" data-singer-name>singerName</h4>
 							</div>
 							<div class="buttonPlayContainer">
 								<button id="buttonPlay">
@@ -102,8 +86,28 @@
 					<div class="swiper-pagination"></div>
 				</div>
 			</div>
-		</body>
+		</div>
+		<div class="player">
+			<div class="player-track">
+				<div id="artist-name" class="artist-name">{{ songs[0].singerName }}</div>
+				<div class="music-name" id="music-name">{{ songs[0].musicTitle }}</div>
+				<audio id="audio"><source src='uploads/audio/{{songs[0].audio}}' type="audio/mp3"></audio>
+				<div class="progress-bar" id="slider">
+					<div class="fillBar" id="elapsed"></div>
+				</div>
+				<div class="time" id="timer">00:00</div>
+			</div>
+			<div class="circle">
+				<div class="circ"></div>
+				<div><img id="thumbnail" class="thumbnail" src='uploads/covers/{{songs[0].cover}}'></div>
+			</div>
+			<div class="player-control">
+				<i id="prev" class="prev-btn fa fa-backward"></i>
+				<button class="play-btn1 transparent-btn">
+					<i id="play" class="play-btn fa fa-play"></i>
+				</button>
+				<i id="next" class="next-btn fa fa-forward"></i>
+			</div>
+		</div>
 	</body>
-</html></body></html></div><div class="player"><div class="player-track"><div id="artist-name" class="artist-name">{{ songs[0].singerName }}</div><div class="music-name" id="music-name">{{ songs[0].musicTitle }}</div><audio id="audio"><source src='uploads/audio/{{songs[0].audio}}' type="audio/mp3"></audio><div class="progress-bar" id="slider">
-<div class="fillBar" id="elapsed"></div></div><div class="time" id="timer">00:00</div></div><div class="circle"><div class="circ"></div><div><img id="thumbnail" class="thumbnail" src='uploads/covers/{{songs[0].cover}}'></div></div><div class="player-control"><i id="prev" class="prev-btn fa fa-backward"></i><button class="play-btn1 transparent-btn">
-<i id="play" class="play-btn fa fa-play"></i></button><i id="next" class="next-btn fa fa-forward"></i></div></div></body></html>
+</html>

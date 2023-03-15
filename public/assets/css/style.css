@@ -1,58 +1,63 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
-/* @keyframes bgImage {
-	100% {
-		background-position: 15% 50%;
-	}
-} */
 
-html,
 body {
 	position: relative;
-	height: 100%;
-	/* background-image: url("../img/homeBg.png"); */
+	height: 100vh;
+	background-image: url("../img/bgHome.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
-	/* background-color: #410c4f; */
-	/* animation: bgImage 6s infinite alternate linear; */
 	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 	font-size: 14px;
-	margin: 0;
-	padding: 0;
-	color: #000;
 	overflow-x: auto;
 	overflow-y: hidden;
 }
 
 .swiper {
 	width: 80%;
-	padding-top: 5%;
 	padding-bottom: 70px;
-	margin-bottom: 100px;
-	/* margin: 0 !important; */
 }
 
 .swiper-slide {
 	background-position: center;
 	background-size: cover;
-	width: 300px;
-	height: 300px;
+	width: 200px;
+	height: 250px;
+	background-color: #14021b;
+	border-radius: 10px;
 }
 
 .swiperContainer {
-	width: 80%; /* or any other width you prefer */
-	margin: 10%; /* this will center the container horizontally */
+	width: 80%;
+	margin-top: 10%;
+	margin-left: 10%;
 }
 
 .swiper-slide img {
 	display: block;
 	width: 100%;
-	height: 80%;
+	height: 75%;
+	border-radius: 10px;
 }
 
-.swiper-pagination {
-	margin-bottom: 25%;
-	color: black;
+.singer {
+	color: white;
+	font-size: 12px;
+	margin-top: 0px;
+	margin-bottom: 30px;
+	padding-left: 10px;
 }
+
+.title {
+	color: white;
+	font-size: 15px;
+	margin-bottom: 5px;
+	padding-left: 10px;
+}
+
+/* .swiper-pagination {
+	margin-bottom: 25%;
+	color: red;
+} */
 
 .buttonPlayContainer {
 	text-align: center;
@@ -60,22 +65,17 @@ body {
 #buttonPlay {
 	border-radius: 4px;
 	font-size: 14px;
-	background-color: #8f4da9; /* pink background */
-	border: none; /* Remove button border */
-	color: rgb(11, 4, 4); /* Text color */
-	padding: 12px 24px; /* Button padding */
-	text-decoration: none; /* Remove underline */
-	display: inline-block; /* Make the button inline */
+	background-color: #8f4da9;
+	border: none;
+	color: white;
+	padding: 12px 24px;
+	text-decoration: none;
+	display: inline-block;
 	transition-duration: 0.4s; /* Transition duration */
 }
 
 #buttonPlay:hover {
-	background-color: rgba(
-		239,
-		109,
-		188,
-		0.3
-	); /* Darker  background on hover */
+	background-color: rgba(239, 109, 188, 0.3);
 }
 
 .labelCategories {

@@ -1,14 +1,3 @@
-/* html, */
-body {
-	align-items: center;
-	justify-content: center;
-	font-family: "Montserrat", sans-serif;
-	font-family: spotify-circular, spotify-circular-cyrillic,
-		spotify-circular-arabic, spotify-circular-hebrew, Helvetica Neue,
-		helvetica, arial, Hiragino Kaku Gothic Pro, Meiryo, MS Gothic,
-		sans-serif;
-}
-
 .thumbnail {
 	width: 120px;
 	height: 120px;
@@ -22,7 +11,7 @@ body {
 }
 .player {
 	position: absolute;
-	top: 80%;
+	top: 65%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	padding: 10px;
@@ -55,7 +44,7 @@ body {
 	z-index: 1;
 }
 .player .player-track {
-	background-color: rgb(0, 0, 0);
+	background-color: #222222;
 	top: 0;
 	margin-left: 15px;
 	margin-right: 15px;
@@ -63,48 +52,52 @@ body {
 	border-radius: 15px 15px 0px 0px;
 	height: 7rem;
 }
-/* #favoriteIcon {
-	margin-left: 80%;
-	font-size: large;
-	color: #8f4da9;
-} */
+
 .favoriteIconContainer {
 	position: absolute;
 	top: 0;
-	left: 0;
+	left: 10px;
 	font-size: 2rem;
 	cursor: pointer;
 	color: white;
 }
 .like {
-	color: #8f4da9 important;
+	color: #8f4da9 !important;
+	font-size: 0.8em;
 }
 
 .player .player-track .active {
 	top: -100px;
 }
 .player .player-track .time {
-	font-size: 16px;
 	margin: 5px 0px 20px;
-	height: 6px;
-	color: #b3b3b3; /* secondary text color */
+	height: 2px;
+	color: rgb(99, 99, 103);
+	/* line-height: 0; */
+	font-size: 9pt;
+	float: right;
+	font-family: Arial, Sans-Serif;
 }
 .player .player-track .progress-bar {
 	background-color: hsla(0, 0%, 100%, 0.3);
 	border-radius: 20px;
+	color: #8f4da9;
 }
 .player .player-track .progress-bar .fillBar {
 	width: 0;
-	height: 6px;
+	height: 4px;
 	border-radius: 20px;
+	background: rgb(239, 109, 188);
+	border-radius: 2px;
 }
+
 .player .player-track .artist-name {
-	color: #ffffff; /* primary text color */
+	color: #ffffff;
 	font-weight: bold;
 	font-size: 1.5em;
 }
 .player .player-track .music-name {
-	color: #b3b3b3; /* secondary text color */
+	color: #b3b3b3;
 	font-size: 1em;
 	margin-bottom: 20px;
 }
@@ -134,7 +127,7 @@ body {
 }
 .play-btn:before,
 .pause-btn:before {
-	border-radius: 500px;
+	border-radius: 50%;
 	color: #ffffff;
 	background-color: #8f4da9;
 	padding: 10px 10px 10px 15px;
@@ -143,6 +136,7 @@ body {
 .transparent-btn {
 	background-color: transparent;
 	border: none;
+	text-align: center;
 }
 .play-btn:hover:before {
 	filter: brightness(1.08) saturate(1.03);

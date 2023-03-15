@@ -29,10 +29,7 @@ class MusicCrudController extends AbstractCrudController
                 ->setBasePath('/uploads/covers/')
                 ->setUploadDir('public/uploads/covers')
                 ->setRequired(false),
-            // ->onlyOnIndex(),
-            // textField::new('coverFile')
-            //     ->setFormType(VichImageType::class),
-            // ->hideOnIndex(),
+
             ImageField::new('audio')
                 ->setBasePath('/uploads/audio/')
                 ->setUploadDir('public/uploads/audio')

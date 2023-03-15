@@ -22,7 +22,7 @@ class UserCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
             TextField::new('email'),
-            // TextField::new('password'),
+            TextField::new('password'),
             CollectionField::new('roles'),
         ];
     }

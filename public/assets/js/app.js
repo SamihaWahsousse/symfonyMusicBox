@@ -1,12 +1,17 @@
+//toggle the menu burger in the navbar (_nav.html.twig ->the navbar menu)
+const toggleMenu = () => document.body.classList.toggle("open");
+
 //get data songs from twig home.twig.html in JSON format
 var arraySongs = document.getElementById("arraySongs");
 var songs = arraySongs.dataset.songs;
 //console.log("my songs list : " + songs);
+
 //We use JSON.parse() to convert songs Array of JSON OBJECTS to a JavaScript array
 if (typeof songs === "string") {
 	songs = JSON.parse(songs);
 	// console.log(songs);
 }
+
 //retrieve Categories from songs array
 var songsByCategory = [];
 songs.forEach((song) => {
@@ -17,9 +22,23 @@ songs.forEach((song) => {
 		songsByCategory[song.category] = [song];
 	}
 });
-console.log("resultat: " + songsByCategory["Pop"]);
+//console.log("resultat: " + songsByCategory["Pop"]);
 
-//display swiper slide with update data from songs array (category)
+// Manage the selected category from the radio button in nav bar dropdown menu
+var radioButtonSection = document.getElementsByName("category");
+var selectedCategory = "All";
+for (var i = 0; i < radioButtonSection.length; i++) {
+	radioButtonSection[i].onclick = function () {
+		console.log("selected cat : " + this.value);
+
+		if (selectedCategory != this.value) {
+			selectedCategory = this.value;
+			updateSwipper(selectedCategory);
+		}
+	};
+}
+
+//display swiper slide with update data from songs array (for each selected category)
 const swiperSlideTemplate = document.querySelector(
 	"[ data-swiperslide-template]"
 );
@@ -28,8 +47,11 @@ const slideMusic = document.querySelector("[data-slide-music]");
 const singePhoto = document.querySelector("[data-singer-image]");
 const singerNom = document.querySelector("[data-singer-name]");
 const musicTitle = document.querySelector("[data-music-title]");
+
+//displayed all the songs in the slider by default
 updateSwipper("all");
 
+//function that update the displayed slider from the choosen catagory
 function updateSwipper(category) {
 	let songsToDisplay;
 	if (category === "all") {
@@ -60,47 +82,32 @@ function updateSwipper(category) {
 		let favoriteHeart = swiperSlide.querySelector(
 			".favoriteIconContainer > a"
 		);
-		/*
-		let hrefRemoveFavorite = Routing.generate("remove_favorites", {
-			id: song.id,
-		});
-		let hrefAddFavorite = Routing.generate("add_favorites", {
-			id: song.id,
-		}); */
-		if (song.favorite) {
-			favoriteHeart.setAttribute(
-				"href",
-				"/favorites/remove/" + song.id
-			);
-			favoriteHeart
-				.querySelector("#favoriteIconHeart")
-				.classList.add("fas");
-		} else {
-			favoriteHeart.setAttribute("href", "/favorites/add/" + song.id);
-			favoriteHeart
-				.querySelector("#favoriteIconHeart")
-				.classList.add("far");
+
+		if (favoriteHeart != undefined) {
+			if (song.favorite) {
+				favoriteHeart.setAttribute(
+					"href",
+					"/favorites/remove/" + song.id
+				);
+				favoriteHeart
+					.querySelector("#favoriteIconHeart")
+					.classList.add("fas");
+			} else {
+				favoriteHeart.setAttribute(
+					"href",
+					"/favorites/add/" + song.id
+				);
+				favoriteHeart
+					.querySelector("#favoriteIconHeart")
+					.classList.add("far");
+			}
 		}
 
 		swiperWrapper.append(swiperSlide);
 	});
 }
 
-// gestion de la sélection d'une catégorie
-var radioButtonSection = document.getElementsByName("category");
-var selectedCategory = "all";
-for (var i = 0; i < radioButtonSection.length; i++) {
-	radioButtonSection[i].onclick = function () {
-		console.log("selected cat : " + this.value);
-
-		if (selectedCategory != this.value) {
-			selectedCategory = this.value;
-			updateSwipper(selectedCategory);
-		}
-	};
-}
-//Swiper JS
-
+//Add the Swiper JS Object
 var swiper = new Swiper(".mySwiper", {
 	effect: "coverflow",
 	grabCursor: true,
@@ -124,28 +131,24 @@ var swiper = new Swiper(".mySwiper", {
 	},
 });
 
+//test to retreive the data from each selected slider
 swiper.on("transitionEnd", function () {
 	console.log("*** mySwiper.realIndex", swiper.realIndex);
 });
 
-// const songs = document.getElementById("data-songs").dataset.songs;
+//The music Player
 const thumbnail = document.getElementById("thumbnail");
-function playMusicFromSwiper(song) {
-	// console.log("all songs " + JSON.stringify(songs));
-	console.log("song : " + song);
 
+//function that allows playing music while click in a play button
+function playMusicFromSwiper(song) {
+	//console.log("song : " + song);
 	const audio = document.getElementById("audio");
 	document
 		.querySelector("audio > source")
 		.setAttribute("src", "uploads/audio/" + song.audio);
 	document.getElementById("artist-name").innerText = song.singerName;
 	document.getElementById("music-name").innerText = song.musicTitle;
-
 	thumbnail.src = "uploads/covers/" + song.cover;
-
-	console.log(
-		document.querySelector("audio > source").getAttribute("src")
-	);
 
 	audio.load();
 	audio.play();
@@ -157,10 +160,11 @@ function playMusicFromSwiper(song) {
 		.classList.add("pause-btn", "fa", "fa-pause");
 	thumbnail.classList.add("active");
 }
-///////////////////////////
+/////////////////////////////////////////////////////////////////////////////:
 const audio = document.querySelector("#audio");
 const playPauseButton = document.querySelector("#play");
 
+//add a eventListner to play-Pause button in order to change the icons and the cover rotation in every PLAY or PAUSE action
 playPauseButton.addEventListener("click", () => {
 	if (audio.paused) {
 		audio.play();
@@ -183,7 +187,7 @@ playPauseButton.addEventListener("click", () => {
 	}
 });
 
-//music timer
+//Add the music timer
 var music = document.getElementById("audio");
 var playButton = document.getElementById("play");
 var pauseButton = document.getElementById("pause");
@@ -194,7 +198,6 @@ var duration;
 var timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
 
 music.addEventListener("timeupdate", timeUpdate, false);
-
 music.addEventListener(
 	"canplaythrough",
 	function () {
@@ -203,6 +206,7 @@ music.addEventListener(
 	false
 );
 
+//function that update the audio progress while the music is playing
 function timeUpdate() {
 	var playPercent = timelineWidth * (music.currentTime / duration);
 	playhead.style.width = playPercent + "px";
@@ -224,14 +228,3 @@ function timeUpdate() {
 		timer.innerHTML += ":" + secondsIn;
 	}
 }
-
-//favorit events
-
-// const favoriteBtn = document.getElementById("favoriteIcon");
-// favoriteBtn.addEventListener("click", function () {
-// 	if (favoriteBtn.style.color === "white") {
-// 		favoriteBtn.style.color = "#8f4da9";
-// 	} else {
-// 		favoriteBtn.style.color = "white";
-// 	}
-// });
