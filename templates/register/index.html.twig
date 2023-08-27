@@ -16,23 +16,38 @@
 			<input id="item-2" type="radio" name="item" class="sign-up" checked>
 			<label for="item-2" class="item">Register</label>
 
-			<div class="login-form">
+			<div class="login-form" id="RegisterForm">
 				<div class="sign-up-htm">
 					<div class="group">
-						{{ form_widget(form.name, {'attr': {'class': 'input','id': 'user', 'type': 'text', 'placeholder': 'Username'}}) }}
+						{{ form_widget(form.name, {'attr': {'class': 'input','id': 'user', 'type': 'text', 'placeholder': 'Username','name':'username'}}) }}
 					</div>
 
 					<div class="group">
-						{{ form_widget(form.email, {'attr': {'class': 'input', 'id' :'pass','type' : 'text' ,'placeholder': 'Email adress'}}) }}
+						{{ form_widget(form.email, {'attr': {'class': 'input', 'id' :'email','type' : 'text' ,'placeholder': 'Email adress'}}) }}
+
 					</div>
 
 
+					<!--password-->
 					<div class="group">
-						{{ form_widget(form.password, {'attr': {'class': 'input', 'id' :'pass','type' : 'password' ,'placeholder': 'Password'}}) }}
+						{{ form_widget(form.password, {'attr': {'class': 'input', 'type' : 'password' ,'placeholder': 'Password','name':'password'}}) }}
+						{# <small></small> #}
+						<h5>Password must contain:</h5>
+						<ul>
+							<li id="lowerCase">One lowercase character</li>
+							<li id="upperCase">One uppercase character</li>
+							<li id="specialCharacter">One special character</li>
+							<li id="numbers">One number</li>
+							<li id="minimumCharacters">8 characters minimum</li>
+						</ul>
+
+
 					</div>
 
-					<div class="group">
+					<div class=" group">
 						{{ form_widget(form.submit, {'attr': {'class': 'button', 'value': 'Sign Up'}}) }}
+
+
 					</div>
 
 					<div class="hr"></div>
