@@ -14,6 +14,7 @@ const inputPassword = registerPasswordField.addEventListener(
 // Function validation password
 const validRegisterPassword = function (inputPassword) {
 	console.log(inputPassword);
+
 	// Get html/twig fields - Registration form
 	let listeMinimumCharacters = document.querySelector(
 		"#minimumCharacters"
@@ -25,44 +26,38 @@ const validRegisterPassword = function (inputPassword) {
 	);
 	let numberValid = document.getElementById("numbers");
 
-	// 8 characters
+	// 8 characters minimum
 	if (inputPassword.length > 8) {
 		listeMinimumCharacters.style.color = "green";
 	} else {
 		listeMinimumCharacters.style.color = "red";
 	}
 
+	// Uppercase letters
 	if (/[A-Z]/.test(inputPassword)) {
-		// msg = "le password contient une maj";
-		// console.log(msg);
 		upperCaseValid.style.color = "green";
 	} else {
 		upperCaseValid.style.color = "red";
 	}
 
+	// LowerCase letters
 	if (/[a-z]/.test(inputPassword)) {
-		// msg = "le password contient une min";
-		// console.log(msg);
 		lowerCaseValid.style.color = "green";
 	} else {
 		lowerCaseValid.style.color = "red";
 	}
 
+	//Numbers
 	if (/[0-9]/.test(inputPassword)) {
-		msg = "le password contient un chiffre";
 		numberValid.style.color = "green";
 	} else {
 		numberValid.style.color = "red";
 	}
 
+	// Special Characters
 	if (/[#?!@$%^&*-]/.test(inputPassword)) {
-		// msg = "le password contient un caractère special";
 		specialCharacterValid.style.color = "green";
 	} else {
 		specialCharacterValid.style.color = "red";
 	}
 };
-// 	// 	des chiffres et des lettres,
-// 	// des signes de ponctuation,
-// 	// des majuscules et des minuscules.
-// };
