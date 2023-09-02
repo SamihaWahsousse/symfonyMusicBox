@@ -31,7 +31,7 @@ a {
 .container {
 	width: 100%;
 	margin: auto;
-	margin-top: 5%;
+	margin-top: 2%;
 	max-width: 525px;
 	min-height: 670px;
 	position: relative;
@@ -60,7 +60,7 @@ a {
 }
 
 .login-container .sign-up-htm {
-	top: 20%;
+	/* top: 10%; */
 }
 
 .login-container .sign-in,
@@ -157,4 +157,34 @@ a {
 
 .footer {
 	text-align: center;
+}
+
+/* .my-custom-class-for-errors{
+
+} */
+
+/* ul {
+	list-style-type: none;
+} */
+
+.listeOfErrors {
+	list-style-type: circle;
+	font-size: small;
+	font-weight: 100;
+	color: #fff;
+}
+
+.error {
+	height: 10px;
+	width: 20px;
+	background-color: #df00ff;
+	color: #fff;
+	/* margin-bottom: 2%; */
+}
+
+.invalid-feedback {
+	color: red;
+	font-size: smaller;
+	margin-left: 20px;
+	margin-top: 10px;
 }

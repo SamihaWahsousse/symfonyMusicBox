@@ -3,16 +3,21 @@
 {% block title %}Hello RegisterController!
 {% endblock %}
 
+
 {% block body %}
+
 	{{ form_start(form) }}
 
-	{# {% if error %}<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>{% endif %} #}
+	{# {% if form_errors %}
+																																					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+																																				{% endif %} #}
 
 	<div class="my-custom-class-for-errors">
 		{{ form_errors(form) }}
 	</div>
 	<div class="container">
 		<div class="login-container">
+			<div id="error"></div>
 			<input id="item-2" type="radio" name="item" class="sign-up" checked>
 			<label for="item-2" class="item">Register</label>
 
@@ -20,28 +25,28 @@
 				<div class="sign-up-htm">
 					<div class="group">
 						{{ form_widget(form.name, {'attr': {'class': 'input','id': 'user', 'type': 'text', 'placeholder': 'Username','name':'username'}}) }}
+						{{ form_errors(form.name) }}
 					</div>
-
 					<div class="group">
 						{{ form_widget(form.email, {'attr': {'class': 'input', 'id' :'email','type' : 'text' ,'placeholder': 'Email adress'}}) }}
-
+						{{ form_errors(form.email) }}
 					</div>
-
-
 					<!--password-->
 					<div class="group">
 						{{ form_widget(form.password, {'attr': {'class': 'input', 'type' : 'password' ,'placeholder': 'Password','name':'password'}}) }}
-						{# <small></small> #}
+						{{ form_errors(form.password) }}
 						<h5>Password must contain:</h5>
-						<ul>
-							<li id="lowerCase">One lowercase character</li>
-							<li id="upperCase">One uppercase character</li>
-							<li id="specialCharacter">One special character</li>
-							<li id="numbers">One number</li>
-							<li id="minimumCharacters">8 characters minimum</li>
-						</ul>
+						<div class="containerErrorsJs" id="containerErrorsPassword">
+							<ul class="listeOfErrors">
+								<li id="lowerCase">One lowercase character</li>
+								<li id="upperCase">One uppercase character</li>
+								<li id="specialCharacter">One special character</li>
+								<li id="numbers">One number</li>
+								<li id="minimumCharacters">8 characters minimum</li>
+							</ul>
 
 
+						</div>
 					</div>
 
 					<div class=" group">

@@ -11,6 +11,8 @@ const inputPassword = registerPasswordField.addEventListener(
 	}
 );
 
+// const displayErrors = function (inputPasswordField) {};
+
 // Function validation password
 const validRegisterPassword = function (inputPassword) {
 	console.log(inputPassword);
