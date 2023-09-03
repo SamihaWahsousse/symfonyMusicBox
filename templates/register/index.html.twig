@@ -8,10 +8,6 @@
 
 	{{ form_start(form) }}
 
-	{# {% if form_errors %}
-																																					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-																																				{% endif %} #}
-
 	<div class="my-custom-class-for-errors">
 		{{ form_errors(form) }}
 	</div>
@@ -44,28 +40,27 @@
 								<li id="numbers">One number</li>
 								<li id="minimumCharacters">8 characters minimum</li>
 							</ul>
-
-
 						</div>
 					</div>
 
 					<div class=" group">
 						{{ form_widget(form.submit, {'attr': {'class': 'button', 'value': 'Sign Up'}}) }}
-
+						<div class="footer">
+							<a href="{{ path('app_login') }}">Already have an account?</a>
+						</div>
 
 					</div>
 
-					<div class="hr"></div>
-					<div class="footer">
-						<a href="{{ path('app_login') }}">Already have an account?</a>
-					</div>
+					{# <div class="hr"></div>
+																																																								<div class="footer">
+																																																									<a href="{{ path('app_login') }}">Already have an account?</a>
+																																																								</div> #}
 
 				</div>
 
 			</div>
 		</div>
 
-		{{ form_rest(form) }}
 		{{ form_end(form) }}
 	</div>
 

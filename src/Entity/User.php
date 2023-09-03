@@ -37,15 +37,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         match: true,
         message: 'Password does not meet the policy requirements.',
     )]
-    // #[Assert\Length(
-    //     min: 8,
-    //     max: 50,
-    //     // minMessage: 'Password at leat 8 characters',
-    //     // maxMessage: 'Password cannot be longer than {{ limit }} characters'
-    // )]
+
     #[Assert\NotBlank(message: 'Password could not be empty')]
     private ?string $password = null;
 
+    /**
+     * @var string The default password without hash for the resetPassword Form
+     */
+    private ?string $plainPassword;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'userName could not be empty')]
@@ -128,6 +127,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+
+
     /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
@@ -185,5 +198,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    // public function __toString()
+    // {
+    //     return $this->getPlainPassword();
+    // }
+
+
+
+    public function checkNewPassword(): string
+    {
+        $texte = "Hello from user entity";
+
+        return $texte;
     }
 }
