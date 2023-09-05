@@ -41,13 +41,12 @@ class RegisterController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // // ... perform some action, such as saving the task to the database
+            // /Redirect to login page after saving data into DB
             return $this->redirectToRoute('app_login');
         }
 
 
         return $this->render('register/index.html.twig', [
-            // 'controller_name' => 'RegisterController',
             'form' => $form->createview()
 
         ]);

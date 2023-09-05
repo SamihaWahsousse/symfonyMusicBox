@@ -22,39 +22,67 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * Cette fonction permet de changer le password utilisateur et de lui demander de fournir un mot de passe different à celui stocker dans la BDD
+     */
 
     #[Route('/editUserPassword', name: 'edit_user_password')]
-    public function editUser(Request $request, ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher, UserInterface $user)
+    public function editUser(Request $request, ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher, UserInterface $user): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         //récupérer l'utilisateur connecté 
         $user = $this->getUser();
         //instanciation du formulaire avec la méthode creatForm
-        $form = $this->createForm(ResetPasswordType::class, $user);
-        $form->handleRequest($request);
+        $changePasswordForm = $this->createForm(ResetPasswordType::class, $user);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $plaintextPassword = $form->getData()->getPlainPassword();
-            // dd($data);
-            $oldPassword = $user->getPassword();
-            if ($passwordHasher->isPasswordValid($user, $plaintextPassword)) {
-                dd("l ancien et le nouveau mot d epasse sont identiques");
+        $changePasswordForm->handleRequest($request);
+        $entityManager = $doctrine->getManager();
+
+        if ($changePasswordForm->isSubmitted() && $changePasswordForm->isValid()) {
+            $plaintextPassword = $changePasswordForm->getData()->getPlainPassword();
+
+            // isValidPassword vérifie si le nouveau mot d epasse indiqué est identiques ou non avec celui stocker dans la BDD;
+            if (!$passwordHasher->isPasswordValid($user, $plaintextPassword)) {
+                // dd("l ancien et le nouveau mot de passe sont identiques");
+                $newHashedPassword = $passwordHasher->hashPassword($user, $plaintextPassword);
+                $user->setPassword($newHashedPassword);
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Votre mot de passe a été mis à jour');
+                return $this->redirectToRoute('app_musicbox');
             } else {
-                dd("pas ok");
+                dd("l ancien et le nouveau mot de passe ne sont pas identiques");
             }
 
-            //send the data to database
-            $entityManager = $doctrine->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            //     $user->setPassword($passwordHasher->hashPassword(
+            //         $user,
+            //         $changePasswordForm->get('plainPassword')->getData()
+            //     ));
 
-            $this->addFlash('message', 'Profil mis à jour');
+            //     // $user = $changePasswordForm->getData();
+            //     $entityManager->persist($user);
+            //     $entityManager->flush();
+            //     $this->addFlash('message', 'Profil mis à jour');
+            //     return $this->redirectToRoute('app_musicbox');
+            // }
+
+            //send the data to database
+            // $entityManager->persist($user);
+            // $entityManager->flush();
+
+            // $this->addFlash('message', 'Profil mis à jour');
 
             // redirect to home page
-            return $this->redirectToRoute('app_musicbox');
+            // return $this->redirectToRoute('app_musicbox');
         }
 
         return $this->render('user/editUser.html.twig', [
-            'form' => $form->createView(),
+            'changePasswordForm' => $changePasswordForm->createView(),
         ]);
     }
 }
