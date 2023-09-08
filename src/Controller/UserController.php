@@ -11,9 +11,18 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 class UserController extends AbstractController
 {
+    private $flashMessage;
+    public function __construct(FlashBagInterface $flashMessage)
+    {
+        $this->flashMessage = $flashMessage;
+    }
+
+
+
     #[Route('/user', name: 'app_user')]
     public function index(): Response
     {
@@ -45,8 +54,10 @@ class UserController extends AbstractController
             $plaintextPassword = $changePasswordForm->getData()->getPlainPassword();
 
             // isValidPassword vérifie si le nouveau mot d epasse indiqué est identiques ou non avec celui stocker dans la BDD;
-            if (!$passwordHasher->isPasswordValid($user, $plaintextPassword)) {
+            if (!($passwordHasher->isPasswordValid($user, $plaintextPassword))) {
                 // dd("l ancien et le nouveau mot de passe sont identiques");
+                // dd($passwordHasher->isPasswordValid($user, $plaintextPassword));
+
                 $newHashedPassword = $passwordHasher->hashPassword($user, $plaintextPassword);
                 $user->setPassword($newHashedPassword);
 
@@ -56,7 +67,8 @@ class UserController extends AbstractController
                 $this->addFlash('success', 'Votre mot de passe a été mis à jour');
                 return $this->redirectToRoute('app_musicbox');
             } else {
-                dd("l ancien et le nouveau mot de passe ne sont pas identiques");
+                // dd("l ancien et le nouveau mot de passe sont  identiques");
+                $this->addFlash('error', 'l ancien et le nouveau mot de passe sont  identiques');
             }
 
             //     $user->setPassword($passwordHasher->hashPassword(
@@ -78,7 +90,7 @@ class UserController extends AbstractController
             // $this->addFlash('message', 'Profil mis à jour');
 
             // redirect to home page
-            // return $this->redirectToRoute('app_musicbox');
+
         }
 
         return $this->render('user/editUser.html.twig', [

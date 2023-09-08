@@ -44,14 +44,13 @@
 			</button>
 		</div>
 		<div class="dropdown">
-			<a href="{{path('edit_user_password')}}" role="button">change password</a>
+			<button onclick="window.location.href = '{{path('edit_user_password')}}';">Change password</div>
 		</div>
-	</div>
-	{% if app.user %}
-		<div class="user-info">
-			<img src="{{ asset ("assets/img/user.png")}}"/>
-			<span>Welcome,
-				{{ app.user.name }}</span>
-		</div>
-	{% endif %}
-</nav>
+		{% if app.user %}
+			<div class="user-info">
+				<img src="{{ asset ("assets/img/user.png")}}"/>
+				<span>Welcome,
+					{{ app.user.name }}</span>
+			</div>
+		{% endif %}
+	</nav>

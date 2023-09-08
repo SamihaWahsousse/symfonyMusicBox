@@ -1,13 +1,39 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Edit user-Change password
+{% block title %}Edit user - Change password
 {% endblock %}
 
 {% block body %}
-	<style></style>
 
-	<div>
-		<h2>Edit Profile</h2>
-		{{form(changePasswordForm)}}
+	<div
+		class="my-custom-class-for-errors">{# {{ form_errors(changePasswordForm) }} #}
+	</div>
+	{% for message in app.flashes('error')%}
+		<div class="alert alert-error">
+			{{message}}
 		</div>
-	{% endblock %}
+	{% endfor %}
+
+
+	<div class="containerEditForm ">
+		<label for="item-2" class="item">Change password</label>
+		{# <h2>Change Password</h2> #}
+		{# <div id="error"></div> #}
+		<div class="editPassword-form">
+			{{ form(changePasswordForm) }}
+			</div>
+			<h5>Password must contain:</h5>
+			<div class="containerErrorsJs" id="containerErrorsPassword">
+				<ul class="listeOfErrors">
+					<li id="lowerCase">One lowercase character</li>
+					<li id="upperCase">One uppercase character</li>
+					<li id="specialCharacter">One special character</li>
+					<li id="numbers">One number</li>
+					<li id="minimumCharacters">8 characters minimum</li>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+
+{% endblock %}
