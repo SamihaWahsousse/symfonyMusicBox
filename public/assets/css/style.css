@@ -14,12 +14,12 @@ body {
 
 .swiper {
 	width: 80%;
-	padding-bottom: 70px;
+	padding-bottom: 60px;
 }
 
 .swiper-slide {
 	background-position: center;
-	background-size: cover;
+	/* background-size: cover; */
 	width: 200px;
 	height: 250px;
 	background-color: #14021b;
@@ -28,8 +28,9 @@ body {
 
 .swiperContainer {
 	width: 80%;
-	margin-top: 10%;
+	margin-top: 5%;
 	margin-left: 10%;
+	height: 10rem;
 }
 
 .swiper-slide img {

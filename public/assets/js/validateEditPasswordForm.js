@@ -12,13 +12,14 @@ const formEditPassword = document.forms["reset_password"];
 const submitButton = document.getElementById("reset_password_Save");
 const errorValidationField = document.getElementById("error");
 const RegexPasswordValidation =
-	"/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
+	/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
 formEditPassword.addEventListener("submit", (e) => {
 	let messages = [];
+	console.log(newPassword.value);
 	if (
-		newPassword.value === " " ||
-		repeatedNewPassword.value === " "
+		newPassword.value === null ||
+		repeatedNewPassword.value === null
 	) {
 		messages.push("- Password is required");
 	}
@@ -26,12 +27,11 @@ formEditPassword.addEventListener("submit", (e) => {
 	if (newPassword.value !== repeatedNewPassword.value) {
 		messages.push("- Les deux mot de passe ne sont pas identiques");
 	}
-	if (newPassword.value !== RegexPassword) {
+	if (!RegexPasswordValidation.test(newPassword.value)) {
 		messages.push("- Password ne respecte pas la régles du password");
 	}
 	if (messages.length > 0) {
 		e.preventDefault();
-		console.log(e);
 		errorValidationField.innerHTML = messages.join("<br>");
 	}
 });
