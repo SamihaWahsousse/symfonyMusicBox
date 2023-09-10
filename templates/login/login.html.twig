@@ -5,12 +5,12 @@
 {% block body %}
 
 	<form method="post">
-		{% if error %}
-			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-		{% endif %}
 
 		<div class="container">
 			<div class="login-container">
+				{% if error %}
+					<div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
 				<input id="item-1" type="radio" name="item" class="sign-in" checked>
 				<label for="item-1" class="item">Sign In</label>
 
