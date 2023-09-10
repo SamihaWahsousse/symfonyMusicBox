@@ -60,7 +60,7 @@ a {
 }
 
 .login-container .sign-up-htm {
-	/* top: 10%; */
+	top: 10%;
 }
 
 .login-container .sign-in,
@@ -94,7 +94,6 @@ a {
 .login-form {
 	/* min-height: 345px; */
 	min-height: 300px;
-
 	position: relative;
 	perspective: 1000px;
 	transform-style: preserve-3d;
@@ -170,12 +169,21 @@ a {
 }
 
 .error {
-	height: 10px;
-	width: 20px;
-	background-color: #df00ff;
-	color: #fff;
+	/* height: 10px;
+	width: 20px; */
+	/* background-color: #df00ff; */
+	color: red;
 	padding-bottom: 0%;
-	/* margin-bottom: 2%; */
+	margin-bottom: 2%;
+	height: 4px;
+	margin: 10px 0 40px 0;
+}
+#error {
+	/* background-color: #df00ff; */
+	color: red;
+	padding-bottom: 0%;
+	height: 10px;
+	/* margin: 10px 0 40px 0; */
 }
 
 .invalid-feedback {
@@ -183,4 +191,5 @@ a {
 	font-size: smaller;
 	margin-left: 20px;
 	margin-top: 10px;
+	/* background-color: #df00ff; */
 }

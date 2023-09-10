@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{# {% extends "base.html.twig" %}
 
 {% block title %}Edit user - Change password
 {% endblock %}
@@ -7,19 +7,19 @@
 
 	<div
 		class="my-custom-class-for-errors">{# {{ form_errors(changePasswordForm) }} #}
-	</div>
+	{# </div>
 	{% for message in app.flashes('error')%}
 		<div class="alert alert-error">
 			{{message}}
 		</div>
-	{% endfor %}
+	{% endfor %} #}
 
 
-	<div class="containerEditForm ">
-		<label for="item-2" class="item">Change password</label>
+	{# <div class="containerEditForm ">
+		<label for="item-2" class="item">Change password</label> #}
 		{# <h2>Change Password</h2> #}
 		{# <div id="error"></div> #}
-		<div class="editPassword-form">
+		{# <div class="editPassword-form">
 			{{ form(changePasswordForm) }}
 			</div>
 			<h5>Password must contain:</h5>
@@ -34,6 +34,68 @@
 			</div>
 
 		</div>
+	</div> #}
+
+{# {% endblock %} #}
+{% extends 'base.html.twig' %} 
+
+{% block title %}MusicBox-change Password page
+{% endblock %}
+
+
+{% block body %}
+
+	{{ form_start(changePasswordForm) }}
+
+	{# <div class="my-custom-class-for-errors">
+		{{ form_errors(changePasswordForm) }}
+	</div> #}
+	
+	<div class="container-EditPassword">
+		<div class="editPassword-container">
+			<div class="error" id="error">
+				{% for message in app.flashes('error')%}
+					<div class="alert alert-error">
+						{{message}}
+					</div>
+				{% endfor %} 
+			</div>
+			<label class="item">Change Password</label>
+
+			<div class="resetPassword-form" id="changePassword">
+					<div class="group">
+						{{ form_widget(changePasswordForm.plainPassword.first,{'attr':{'placeholder':'New password*'}})}}
+						
+					</div>
+			
+					<!--password-->
+					<div class="group">
+						{{ form_widget(changePasswordForm.plainPassword.second,{'attr':{'placeholder':'Confirm password*'}})}}
+					</div>
+					
+					<div class="group">
+						{{ form_widget(changePasswordForm.Save)}}
+					</div>	
+					<div class="containerErrorsJs" id="containerErrorsPassword">
+						<h5>Password must contain:</h5>
+						
+							<ul class="listeOfErrors">
+								<li id="lowerCase">One lowercase character</li>
+								<li id="upperCase">One uppercase character</li>
+								<li id="specialCharacter">One special character</li>
+								<li id="numbers">One number</li>
+								<li id="minimumCharacters">8 characters minimum</li>
+							</ul>
+						</div>
+					</div>
+				<div class="footer">
+				   <a href="{{ path('app_musicbox') }}">Back to home<a>		
+				</div>
+			</div>
+
+		</div>
 	</div>
+		{{ form_end(changePasswordForm) }}
+</div>
 
 {% endblock %}

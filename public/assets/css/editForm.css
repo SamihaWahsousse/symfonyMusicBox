@@ -1,28 +1,86 @@
-.containerEditForm {
+body {
+	margin: 0;
+	color: #c1aac6;
+	background: #131315;
+	font-family: "Montserrat", monospace;
+	font-weight: bold;
+}
+
+*,
+:after,
+:before {
+	box-sizing: border-box;
+}
+
+.container-EditPassword {
 	width: 100%;
 	margin: auto;
-	margin-top: 5%;
-	max-width: 500px;
-	min-height: 500px;
-	/* position: relative; */
+	margin-top: 2%;
+	max-width: 525px;
+	min-height: 650px;
+	position: relative;
 	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
 		0 17px 50px 0 rgba(0, 0, 0, 0.19);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
 }
 
-/* .editPassword-form {
-	margin-bottom: 30px;
-	background-color: aliceblue;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+.editPassword-container {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	padding: 40px 70px 50px 70px;
+	background: #131315;
+	.item {
+		text-transform: uppercase;
+		font-size: 22px;
+		margin-right: 15px;
+		padding-bottom: 5px;
+		margin: 0 15px 70px 0;
+		display: inline-block;
+		border-bottom: 2px solid transparent;
+		cursor: pointer;
+		color: #fff;
+		border-color: #df00ff;
+	}
 }
 
-.password-field {
+#reset_password_plainPassword_first,
+#reset_password_plainPassword_second {
+	width: 100%;
+	color: #fff;
+	display: block;
 	border: none;
 	padding: 15px 20px;
 	border-radius: 25px;
 	background: rgba(255, 255, 255, 0.1);
-} */
+	.input {
+		width: 100%;
+		color: #fff;
+		display: block;
+	}
+}
+
+.resetPassword-form {
+	min-height: 300px;
+	position: relative;
+	perspective: 1000px;
+	transform-style: preserve-3d;
+	.input {
+		border: none;
+		padding: 15px 20px;
+		border-radius: 25px;
+		background: rgba(255, 255, 255, 0.1);
+	}
+}
+
+.resetPassword-form .group {
+	margin-bottom: 15px;
+}
+
+.resetPassword-form .group .button {
+	border: none;
+	padding: 15px 20px;
+	border-radius: 25px;
+	background: #df00ff;
+	color: white;
+	width: 100%;
+}
