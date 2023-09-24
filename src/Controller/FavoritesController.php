@@ -16,7 +16,6 @@ class FavoritesController extends AbstractController
         /** @var $user User */
         $user = $this->getUser();
         $favoritePlaylist = $user->getFavorites();
-        // dd($favoritePlaylist);
 
         return $this->render('favorites/index.html.twig', [
             'favoritePlaylist' => $favoritePlaylist,

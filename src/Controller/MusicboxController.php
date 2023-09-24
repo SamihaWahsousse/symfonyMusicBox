@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Music;
 use App\Repository\MusicRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -23,21 +24,20 @@ class MusicboxController extends AbstractController
 
     #[Route('/favorites/add/{id}', name: 'add_favorites')]
 
-    public function ajoutFavoris(Music $music)
+    public function ajoutFavoris(Music $music, ManagerRegistry $doctrine)
     {
         if (!$music) {
             throw new NotFoundHttpException('Pas de musique trouvée');
         }
         $music->addFavorite($this->getUser());
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($music);
-        $em->flush();
+        $entityManager = $doctrine->getManager();
+        $entityManager->persist($music);
+        $entityManager->flush();
         return $this->redirectToRoute('app_musicbox');
     }
 
     #[Route('/favorites/remove/{id}', name: 'remove_favorites')]
-    public function retraitFavoris(Music $music)
+    public function retraitFavoris(Music $music, ManagerRegistry $doctrine)
     {
         if (!$music) {
             throw new NotFoundHttpException('Pas de musique trouvée');
@@ -45,9 +45,9 @@ class MusicboxController extends AbstractController
 
         $music->removeFavorite($this->getUser());
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($music);
-        $em->flush();
+        $entityManager = $doctrine->getManager();
+        $entityManager->persist($music);
+        $entityManager->flush();
         return $this->redirectToRoute('app_musicbox');
     }
 }

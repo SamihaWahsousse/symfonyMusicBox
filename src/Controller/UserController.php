@@ -68,7 +68,7 @@ class UserController extends AbstractController
                 return $this->redirectToRoute('app_musicbox');
             } else {
                 // dd("l ancien et le nouveau mot de passe sont  identiques");
-                $this->addFlash('error', "l'ancien et le nouveau mot de passe sont  identiques");
+                $this->addFlash('error', "l'ancien et le nouveau mot de passe sont identiques");
             }
 
             //     $user->setPassword($passwordHasher->hashPassword(

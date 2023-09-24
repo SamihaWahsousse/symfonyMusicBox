@@ -48,7 +48,7 @@ h2 {
 	left: 0;
 	display: flex;
 	align-items: stretch;
-	height: 80px;
+	height: 4rem;
 	background: #17181a;
 	color: #f9f9f9;
 	box-shadow: 0 8px 12px rgb(0 0 0 / 20%);
@@ -195,15 +195,10 @@ button > img {
 }
 
 .user-info {
-	/* position: absolute;
-	top: 0;
-	right: 0; */
-	color: #e2d4d4;
+	color: rgb(143, 77, 169);
 	margin: 10px;
-	align-self: flex-end;
 	font-family: "Euclid Circular A";
-	font-size: 18px;
-	float: right;
+	font-size: 16px;
 	align-items: center;
-	padding-bottom: 20px;
+	padding-top: 10px;
 }

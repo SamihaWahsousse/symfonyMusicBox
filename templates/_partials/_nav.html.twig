@@ -31,26 +31,31 @@
 				</div>
 			</div>
 		</div>
-		<div class="dropdown">
-			<button onclick="window.location.href = '{{path('app_favorites')}}';">
-				<img src="{{ asset ("assets/img/heart.png")}}"/>
-				Favoris
-			</button>
-		</div>
-		<div class="dropdown">
-			<button onclick="window.location.href = '{{path('app_logout')}}';">
-				<img src="{{ asset ("assets/img/log-out.png")}}"/>
-				logout
-			</button>
-		</div>
-		<div class="dropdown">
-			<button onclick="window.location.href = '{{path('edit_user_password')}}';">Change password</div>
-		</div>
-		{% if app.user %}
+		{% if app.user != null  %}
+			<div class="dropdown">
+				<button onclick="window.location.href = '{{path('app_favorites')}}';">
+					<img src="{{ asset ("assets/img/heart.png")}}"/>
+					Favoris
+				</button>
+			</div>
+			<div class="dropdown">
+				<button onclick="window.location.href = '{{path('app_logout')}}';">
+					<img src="{{ asset ("assets/img/log-out.png")}}"/>
+					logout
+				</button>
+			</div>
+			<div class="dropdown">
+				<button onclick="window.location.href = '{{path('edit_user_password')}}';">Change password</div>
+			</div>
 			<div class="user-info">
 				<img src="{{ asset ("assets/img/user.png")}}"/>
 				<span>Welcome,
 					{{ app.user.name }}</span>
 			</div>
+		{% else %}
+			<div class="dropdown">
+				<button onclick="window.location.href = '{{path('app_login')}}';">Login</div>
+			</div>
 		{% endif %}
+
 	</nav>
