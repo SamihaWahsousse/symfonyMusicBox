@@ -4,12 +4,10 @@ const toggleMenu = () => document.body.classList.toggle("open");
 //get data songs from twig home.twig.html in JSON format
 var arraySongs = document.getElementById("arraySongs");
 var songs = arraySongs.dataset.songs;
-//console.log("my songs list : " + songs);
 
 //We use JSON.parse() to convert songs Array of JSON OBJECTS to a JavaScript array
 if (typeof songs === "string") {
 	songs = JSON.parse(songs);
-	// console.log(songs);
 }
 
 //retrieve Categories from songs array
@@ -22,14 +20,13 @@ songs.forEach((song) => {
 		songsByCategory[song.category] = [song];
 	}
 });
-//console.log("resultat: " + songsByCategory["Pop"]);
 
 // Manage the selected category from the radio button in nav bar dropdown menu
 var radioButtonSection = document.getElementsByName("category");
 var selectedCategory = "All";
 for (var i = 0; i < radioButtonSection.length; i++) {
 	radioButtonSection[i].onclick = function () {
-		console.log("selected cat : " + this.value);
+		console.log("selected category : " + this.value);
 
 		if (selectedCategory != this.value) {
 			selectedCategory = this.value;
@@ -72,6 +69,7 @@ function updateSwipper(category) {
 		swiperSlide.querySelector("div.songDetails > p").innerText =
 			song.musicTitle;
 
+		//add a listener to call the playMusicFromSwiper function when the button -play- is clicked
 		let playBtn = swiperSlide.querySelector(
 			".buttonPlayContainer > button"
 		);
@@ -79,10 +77,10 @@ function updateSwipper(category) {
 			playMusicFromSwiper(song);
 		});
 
+		// handle the display of the favorite icon "heart" on each music card
 		let favoriteHeart = swiperSlide.querySelector(
 			".favoriteIconContainer > a"
 		);
-
 		if (favoriteHeart != undefined) {
 			if (song.favorite) {
 				favoriteHeart.setAttribute(
@@ -102,7 +100,7 @@ function updateSwipper(category) {
 					.classList.add("far");
 			}
 		}
-
+		//add the music card in the swiper
 		swiperWrapper.append(swiperSlide);
 	});
 }
@@ -125,9 +123,7 @@ var swiper = new Swiper(".mySwiper", {
 		el: ".swiper-pagination",
 	},
 	on: {
-		init: function () {
-			// console.log("test");
-		},
+		init: function () {},
 	},
 });
 
@@ -141,7 +137,6 @@ const thumbnail = document.getElementById("thumbnail");
 
 //function that allows playing music while click in a play button
 function playMusicFromSwiper(song) {
-	//console.log("song : " + song);
 	const audio = document.getElementById("audio");
 	document
 		.querySelector("audio > source")
@@ -150,8 +145,10 @@ function playMusicFromSwiper(song) {
 	document.getElementById("music-name").innerText = song.musicTitle;
 	thumbnail.src = "uploads/covers/" + song.cover;
 
+	//function for play and pause the audio player
 	audio.load();
 	audio.play();
+	//change the pause play icon in the player -pause/play- button
 	document
 		.getElementById("play")
 		.classList.remove("play-btn", "fa", "fa-solid", "fa-play");
@@ -160,11 +157,10 @@ function playMusicFromSwiper(song) {
 		.classList.add("pause-btn", "fa", "fa-pause");
 	thumbnail.classList.add("active");
 }
-/////////////////////////////////////////////////////////////////////////////:
+//add a eventListner to play-Pause button in order to change the icons and the cover rotation in every PLAY or PAUSE action
 const audio = document.querySelector("#audio");
 const playPauseButton = document.querySelector("#play");
 
-//add a eventListner to play-Pause button in order to change the icons and the cover rotation in every PLAY or PAUSE action
 playPauseButton.addEventListener("click", () => {
 	if (audio.paused) {
 		audio.play();
